@@ -1,0 +1,11 @@
+# Python 3.12. Torch on this Intel Mac is 2.2, which needs NumPy 1.x.
+fastapi>=0.115
+uvicorn[standard]>=0.32
+numpy>=1.26.4,<2
+httpx>=0.27
+pytest>=8.0
+torch==2.2.2
+transformers>=4.41,<5
+sentence-transformers>=3.3,<4
+presidio-analyzer>=2.2
+spacy>=3.7

@@ -1,0 +1,139 @@
+:root {
+  --ink: #1c2822;
+  --muted: #5c6b62;
+  --paper: #f6f3ea;
+  --blotter: #d5e3d8;
+  --line: #c9d5cc;
+  --pine: #1f6b4a;
+  --pine-dark: #164e36;
+  --high: #8c3a2f;
+  --low: #8a5a12;
+  --shadow: 0 18px 40px rgba(28, 40, 34, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, #edf5ef, transparent 40%),
+    var(--blotter);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: var(--pine);
+  color: #f7fbf8;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1.1rem;
+  cursor: pointer;
+}
+
+button:disabled { opacity: 0.6; cursor: wait; }
+button:hover:not(:disabled) { background: var(--pine-dark); }
+
+input, textarea, select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  padding: 1.4rem 1.5rem 0.4rem;
+}
+
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.who { display: flex; gap: 0.8rem; align-items: center; color: var(--muted); }
+.who button { background: transparent; color: var(--pine); border: 1px solid var(--pine); }
+
+.login, .desk { padding: 1rem 1.5rem 2rem; }
+.login { max-width: 460px; margin: 0 auto; }
+
+.card {
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 1.1rem;
+}
+
+.tabs { display: flex; gap: 0.4rem; margin: 0.8rem 0; }
+.tab { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.tab.active { background: var(--ink); color: var(--paper); }
+
+label { display: grid; gap: 0.3rem; font-size: 0.92rem; }
+form { display: grid; gap: 0.75rem; }
+.stack { display: grid; gap: 0.75rem; }
+
+.hint, .banner { color: var(--muted); font-size: 0.9rem; }
+.error { color: var(--high); min-height: 1.2rem; }
+.banner { background: #fff7e8; border-radius: 10px; padding: 0.7rem 0.8rem; }
+
+.desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.chat { display: flex; flex-direction: column; min-height: 70vh; }
+.chat-head p { margin: 0.3rem 0 0; color: var(--muted); }
+.transcript {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  max-height: 58vh;
+}
+.bubble { max-width: 90%; padding: 0.75rem 0.9rem; border-radius: 14px; }
+.bubble.user { align-self: end; background: #e5f0e8; }
+.bubble.answer { align-self: start; background: white; border: 1px solid var(--line); }
+.bubble.refused { background: #fff7e8; }
+.citations { margin: 0.55rem 0 0; padding-left: 1rem; color: var(--muted); font-size: 0.85rem; }
+.ask textarea { resize: vertical; }
+
+.records h3 { margin: 1rem 0 0.4rem; }
+.records-head { display: flex; justify-content: space-between; gap: 0.8rem; align-items: center; }
+.records-head input { max-width: 240px; }
+.table-wrap { overflow: auto; max-height: 280px; border: 1px solid var(--line); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th, td { text-align: left; padding: 0.45rem 0.55rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { position: sticky; top: 0; background: #efeae0; }
+.flag { font-size: 0.75rem; border-radius: 999px; padding: 0.1rem 0.45rem; }
+.flag-high { background: #f8e4e0; color: var(--high); }
+.flag-low { background: #f8efd8; color: var(--low); }
+.flag-normal { background: #e5f0e8; color: var(--pine-dark); }
+
+@media (max-width: 860px) {
+  .desk { grid-template-columns: 1fr; }
+  .top { flex-direction: column; align-items: start; }
+  .chat { min-height: auto; }
+}

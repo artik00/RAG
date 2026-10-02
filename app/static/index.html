@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chart desk</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">Local clinic chart</p>
+      <h1>Chart desk</h1>
+    </div>
+    <div class="who" id="who" hidden></div>
+  </header>
+
+  <main id="login" class="login">
+    <section class="card">
+      <p id="banner" class="banner" hidden></p>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" id="tab-customer" data-panel="customer">Patient</button>
+        <button type="button" class="tab" id="tab-admin" data-panel="admin">Staff</button>
+      </div>
+      <form id="customer-login">
+        <label>MRN <input name="mrn" autocomplete="username" placeholder="MRN-10001" required></label>
+        <label>Password <input name="password" type="password" autocomplete="current-password" value="demo" required></label>
+        <button type="submit">Open my chart</button>
+        <p class="hint">Seeded patients use password <strong>demo</strong>. Try MRN-10001.</p>
+      </form>
+      <form id="admin-login" hidden>
+        <label>Staff password <input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Open the desk</button>
+        <p class="hint">The local staff password is <strong>admin</strong>.</p>
+      </form>
+      <p id="login-error" class="error" role="alert"></p>
+    </section>
+  </main>
+
+  <main id="desk" class="desk" hidden>
+    <section class="chat card">
+      <div class="chat-head">
+        <h2>Ask the chart</h2>
+        <p id="chat-scope"></p>
+      </div>
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+      <form id="ask" class="ask">
+        <textarea name="question" rows="3" placeholder="What was my latest HbA1c?" required></textarea>
+        <button type="submit" id="ask-button">Ask</button>
+      </form>
+      <p class="hint">A short answer takes a little while on this computer. One question at a time.</p>
+    </section>
+
+    <section class="records card">
+      <div id="customer-records" hidden>
+        <h2>Your rows</h2>
+        <h3>Appointments</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Reason</th><th>Diagnosis</th></tr></thead>
+            <tbody id="own-visits"></tbody>
+          </table>
+        </div>
+        <h3>Bloodwork</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Collected</th><th>Analyte</th><th>Value</th><th>Flag</th></tr></thead>
+            <tbody id="own-labs"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="admin-records" hidden>
+        <div class="records-head">
+          <h2>All entries</h2>
+          <input id="search" type="search" placeholder="Search name, MRN, analyte">
+        </div>
+        <div class="tabs">
+          <button type="button" class="tab active" data-table="clients">Clients</button>
+          <button type="button" class="tab" data-table="appointments">Appointments</button>
+          <button type="button" class="tab" data-table="bloodwork">Bloodwork</button>
+        </div>
+        <div class="table-wrap" id="admin-table"></div>
+        <h3>Add an entry</h3>
+        <form id="add-form" class="stack">
+          <label>Kind
+            <select name="kind">
+              <option value="client">Client</option>
+              <option value="appointment">Appointment</option>
+              <option value="bloodwork">Bloodwork</option>
+            </select>
+          </label>
+          <div data-kind="client" class="stack">
+            <label>Name <input name="full_name"></label>
+            <label>Date of birth <input name="date_of_birth" placeholder="YYYY-MM-DD"></label>
+            <label>Email <input name="email" type="email"></label>
+            <label>Phone <input name="phone"></label>
+            <label>Address <input name="address"></label>
+          </div>
+          <div data-kind="appointment" class="stack" hidden>
+            <label>Client <select name="appointment_client"></select></label>
+            <label>Date <input name="appointment_date" placeholder="YYYY-MM-DD"></label>
+            <label>Clinician <input name="clinician_name"></label>
+            <label>Reason <input name="reason"></label>
+            <label>Diagnosis <input name="diagnosis"></label>
+            <label>Note <textarea name="note" rows="3"></textarea></label>
+          </div>
+          <div data-kind="bloodwork" class="stack" hidden>
+            <label>Client <select name="lab_client"></select></label>
+            <label>Collected <input name="collected_at" placeholder="YYYY-MM-DD"></label>
+            <label>Panel <input name="panel_name" placeholder="Lipids"></label>
+            <label>Analyte <input name="analyte" placeholder="LDL"></label>
+            <label>Value <input name="value" type="number" step="any"></label>
+            <label>Unit <input name="unit" placeholder="mg/dL"></label>
+            <label>Reference low <input name="ref_low" type="number" step="any"></label>
+            <label>Reference high <input name="ref_high" type="number" step="any"></label>
+          </div>
+          <button type="submit" id="save-button">Save entry</button>
+          <p id="save-note" class="hint"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
